@@ -1,6 +1,8 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken_1')
+const fs= require('fs')
+const secret = fs.readFileSync('./rsPrivate.pem')
 
 // @desc Login
 // @route POST /auth
@@ -29,7 +31,7 @@ const login = async (req, res) => {
                 "roles": foundUser.roles
             }
         },
-        process.env.ACCESS_TOKEN_SECRET,
+        secret,
         { expiresIn: '20s' }
     )
 
@@ -78,7 +80,7 @@ const refresh = (req, res) => {
                         "roles": foundUser.roles
                     }
                 },
-                process.env.ACCESS_TOKEN_SECRET,
+                secret,
                 { expiresIn: '20s' }
             )
 
