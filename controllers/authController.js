@@ -32,7 +32,7 @@ const login = async (req, res) => {
             }
         },
         secret,
-        { expiresIn: '20s' }
+        { expiresIn: '20s',algorithm:'RS256' }
     )
 
     const refreshToken = jwt.sign(
@@ -81,7 +81,7 @@ const refresh = (req, res) => {
                     }
                 },
                 secret,
-                { expiresIn: '20s' }
+                { expiresIn: '20s',algorithm:'RS256' }
             )
 
             res.json({ accessToken })
